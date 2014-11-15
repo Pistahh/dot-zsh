@@ -1,0 +1,70 @@
+
+#autoload colors
+#colors
+#
+#for c in RED GREEN BLUE YELLOW; do
+#    eval PR_$c='%{$fg[${(L)c}]%}'
+#    eval PR_BR_$c='%{$fg_bold[${(L)c}]%}'
+#done
+#eval PR_0='%{$reset_color%}'
+#PS1L='${PR_BR_RED}[${PR_BR_GREEN} >'
+setopt promptsubst
+PR_RED='%{%F{red}%B%}'
+PR_GREEN='%{%F{green}%B%}'
+PR_YELLOW='%{%F{yellow}%B%}'
+PR_BLUE='%{%F{cyan}%B%}'
+PR_RESET='%{%f%b%}'
+PR_SEP="$PR_RED|"
+
+shortps () {
+    echo $1|sed 's/%F{[a-z]*}//g;s/%[fbB]//g'
+}
+
+pslen () {
+    shps=$(shortps ${(e)1})
+    echo ${#${(%)shps}}
+}
+
+precmd () {
+    if [ -n "$WINDOW" ]; then
+        PR_SCREEN="$PR_SEP${PR_YELLOW}S:$WINDOW"
+    else
+        PR_SCREEN=""
+    fi;
+
+    j=$(jobs|wc -l)
+    if [ "$j" != "0" ]; then
+        PR_JOBS="$PR_SEP${PR_YELLOW}J:$j"
+    else
+        PR_JOBS=""
+    fi
+
+    PR_PATH_LEN=$((COLUMNS-$(pslen "$PS1L")-$(pslen "$PS1R")))
+    _PATH_STR="%~"
+    _PATH_LEN=${#${(%)_PATH_STR}}
+    if (( $_PATH_LEN > $PR_PATH_LEN )); then
+        PR_PATH1=$((PR_PATH_LEN/2))
+        PR_PATH2=$((PR_PATH_LEN-PR_PATH1))
+        PS1M='\
+${PR_BLUE}\
+%${PR_PATH1}>...>%~%>>\
+%${PR_PATH2}<<%~%<<'
+    else
+        PS1M='${PR_BLUE}%~'
+    fi
+    PS1="$PS1L$PS1M$PS1R
+$PS1L2"
+
+    echo -ne '%G'
+}
+
+    PS1L='${PR_RED}[$PR_GREEN%n@%m$PR_SEP$PR_GREEN%D{%T}$PR_SCREEN$PR_JOBS$PR_ERROR${PR_RED}|'
+    PS1R='${PR_RED}]${PR_RESET}'
+
+    PS1L2='\
+${PR_RED}[${PR_GREEN}%!\
+%(?..$PR_RED|%?)\
+${PR_RED}]$PR_RESET%B%# $PR_RESET'
+
+export PS2="${PR_RED}[$PR_GREEN%_${PR_RED}]$PR_RESET> "
+

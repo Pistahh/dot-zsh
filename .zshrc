@@ -37,3 +37,6 @@ zstyle ':completion:*:*' menu select=1
 bindkey '^F' accept-and-menu-complete
 
 umask 002
+
+rgr () { grep -ir --exclude='*,v' "$@" . }
+

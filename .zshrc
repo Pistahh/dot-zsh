@@ -1,5 +1,7 @@
 bindkey -e
 
+ZSHDIR=~/.zsh.d
+
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 			     /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
@@ -39,4 +41,6 @@ bindkey '^F' accept-and-menu-complete
 umask 002
 
 rgr () { grep -ir --exclude='*,v' "$@" . }
+
+source $ZSHDIR/z
 

@@ -1,0 +1,4 @@
+
+autoload run-help
+
+rgr () { grep -ir --exclude='*,v' "$@" . }

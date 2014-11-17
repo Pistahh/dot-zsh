@@ -1,0 +1,8 @@
+bindkey -e
+autoload compinit
+compinit
+zstyle ':completion:*:*' menu select=1
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+			     /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+
+bindkey '^F' accept-and-menu-complete

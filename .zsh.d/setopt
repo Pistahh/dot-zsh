@@ -1,0 +1,5 @@
+setopt autocd
+setopt autolist
+setopt noclobber
+setopt extendedglob
+setopt globdots

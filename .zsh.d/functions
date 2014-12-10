@@ -1,5 +1,5 @@
 
 autoload run-help
 
-rgr () { grep -ir --exclude='*,v' "$@" . }
+rgr () { grep --color=auto -ir --exclude='*,v' "$@" . }
 psg() { ps axu | (line; grep -i "$@"|grep -v "grep -i $@") }

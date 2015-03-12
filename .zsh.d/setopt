@@ -3,3 +3,4 @@ setopt autolist
 setopt noclobber
 setopt extendedglob
 setopt globdots
+setopt autopushd

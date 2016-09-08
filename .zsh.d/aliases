@@ -11,4 +11,4 @@ alias g1='gvim --servername g1 --remote-tab'
 alias g2='gvim --servername g2 --remote-tab'
 alias g3='gvim --servername g3 --remote-tab'
 
-alias sdru='screen -drU'
+alias sdru='tmux a'

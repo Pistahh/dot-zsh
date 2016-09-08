@@ -8,3 +8,4 @@ source $ZSHDIR/aliases
 source $ZSHDIR/prompt
 source $ZSHDIR/setopt
 source $ZSHDIR/z
+source $ZSHDIR/ssh-agent

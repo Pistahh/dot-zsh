@@ -2,4 +2,4 @@
 autoload run-help
 
 rgr () { grep --color=auto -ir --exclude='*,v' "$@" . }
-psg() { ps axu | (line; grep -i "$@"|grep -v "grep -i $@") }
+psg() { ps axu | (read first; echo $first; grep -i "$@"|grep -v "grep -i $@") }

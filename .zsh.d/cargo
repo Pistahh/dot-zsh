@@ -1,0 +1,4 @@
+CENV=~/.cargo/env
+
+[[ -f $CENV ]] && source $CENV
+

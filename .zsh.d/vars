@@ -5,4 +5,4 @@ export EDITOR=vim
 export PATH=$PATH:~/local/bin
 export LD_LIBRARY_PATH=~/local/lib/
 eval `dircolors`
-
+export SYSTEMD_PAGER=

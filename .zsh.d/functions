@@ -3,3 +3,4 @@ autoload run-help
 
 rgr () { grep --color=auto -ir --exclude='*,v' "$@" . }
 psg() { ps axu | (read first; echo $first; grep -i "$@"|grep -v "grep -i $@") }
+c.. () { [[ "$1" == "" ]] && return; orig=$(pwd); while true; do old=$(pwd); cd .. ; if [[ ! "$(pwd)" =~ "$1" ]]; then cd $orig; cd $old; return; fi; done }

@@ -1,6 +1,15 @@
 
 autoload run-help
 
-rgr () { grep --color=auto -ir --exclude='*,v' "$@" . }
-psg() { ps axu | (read first; echo $first; grep -i "$@"|grep -v "grep -i $@") }
+rgr () { grep --color=auto -irn \
+    --exclude='*,v'            \
+    --exclude='*.swp'          \
+    --exclude='*.swo'          \
+    --exclude='*.pyc'          \
+    --exclude-dir='.hg'        \
+    --exclude-dir='.git'       \
+    "$@" . }
+
+psg() { ps axu | (read line; echo $line; grep -i "$@"|grep -v "grep -i $@") }
+
 c.. () { [[ "$1" == "" ]] && return; orig=$(pwd); while true; do old=$(pwd); cd .. ; if [[ ! "$(pwd)" =~ "$1" ]]; then cd $orig; cd $old; return; fi; done }

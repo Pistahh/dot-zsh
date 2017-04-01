@@ -7,6 +7,8 @@ alias -g GG='2>&1|grep'
 alias l='less'
 alias t='tail'
 alias h='head'
+
+alias vi=vim
 alias g1='gvim --servername g1 --remote-tab'
 alias g2='gvim --servername g2 --remote-tab'
 alias g3='gvim --servername g3 --remote-tab'

@@ -9,3 +9,4 @@ source $ZSHDIR/prompt
 source $ZSHDIR/setopt
 source $ZSHDIR/ssh-agent
 source $ZSHDIR/cargo
+[[ -f $ZSHDIR/local ]] && source $ZSHDIR/local

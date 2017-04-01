@@ -13,58 +13,46 @@ PR_RED='%{%F{red}%B%}'
 PR_GREEN='%{%F{green}%B%}'
 PR_YELLOW='%{%F{yellow}%B%}'
 PR_BLUE='%{%F{cyan}%B%}'
-PR_RESET='%{%f%b%}'
-PR_SEP="$PR_RED|"
+PR_RESET='%f%b%k'
+PRB_BLUE='%K{blue}%B'
+PRB_GREEN='%K{green}%B'
+PRB_RED='%K{red}%B'
+PRB_YELLOW='%K{yellow}%B'
 
-shortps () {
-    echo $1|sed 's/%F{[a-z]*}//g;s/%[fbB]//g'
-}
-
-pslen () {
-    shps=$(shortps ${(e)1})
-    echo ${#${(%)shps}}
-}
 
 precmd () {
     if [ -n "$WINDOW" ]; then
-        PR_SCREEN="$PR_SEP${PR_YELLOW}S:$WINDOW"
+        PR_SCREEN="$PR_SEP${PRB_YELLOW}S:$WINDOW"
     else
         PR_SCREEN=""
     fi;
 
     j=$(jobs|wc -l)
     if [ "$j" != "0" ]; then
-        PR_JOBS="$PR_SEP${PR_YELLOW}J:$j"
+        PR_JOBS="J:$j"
     else
         PR_JOBS=""
     fi
 
-    PR_PATH_LEN=$((COLUMNS-$(pslen "$PS1L")-$(pslen "$PS1R")))
-    _PATH_STR="%~"
-    _PATH_LEN=${#${(%)_PATH_STR}}
-    if (( $_PATH_LEN > $PR_PATH_LEN )); then
-        PR_PATH1=$((PR_PATH_LEN/2))
-        PR_PATH2=$((PR_PATH_LEN-PR_PATH1))
-        PS1M='\
-${PR_BLUE}\
-%${PR_PATH1}>...>%~%>>\
-%${PR_PATH2}<<%~%<<'
+    git_branch=$(git branch 2>/dev/null|awk '/^\*/ { print $2 }')
+    if [[ $git_branch != "" ]]; then
+        PR_GIT=" ${PR_YELLOW}G:$git_branch"
     else
-        PS1M='${PR_BLUE}%~'
+        PR_GIT=""
     fi
-    PS1="$PS1L$PS1M$PS1R
+
+    PS1="$PS1L1
 $PS1L2"
 
     echo -ne '%G'
 }
 
-    PS1L='${PR_RED}[$PR_GREEN%n@%m$PR_SEP$PR_GREEN%D{%T}$PR_SCREEN$PR_JOBS$PR_ERROR${PR_RED}|'
-    PS1R='${PR_RED}]${PR_RESET}'
+    PS1L1='${PRB_BLUE} %n@%m $PRB_GREEN %D{%T} $PR_RESET$PR_SCREEN$PR_JOBS$PR_GIT${PR_RESET} %B%~$PR_RESET'
 
     PS1L2='\
-${PR_RED}[${PR_GREEN}%!\
-%(?..$PR_RED|%?)\
-${PR_RED}]$PR_RESET%B%# $PR_RESET'
+${PRB_BLUE} %! \
+%(?..$PRB_RED %? )\
+$PR_RESET%B %# $PR_RESET'
 
 export PS2="${PR_RED}[$PR_GREEN%_${PR_RED}]$PR_RESET> "
 

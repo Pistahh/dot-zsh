@@ -6,3 +6,7 @@ export PATH=$PATH:~/local/bin
 export LD_LIBRARY_PATH=~/local/lib/
 eval `dircolors`
 export SYSTEMD_PAGER=
+export KB=1024.0
+export MB=1048576.0
+export GB=1073741824.0
+export REPORTTIME=30

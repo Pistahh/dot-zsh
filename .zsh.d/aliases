@@ -4,7 +4,7 @@ alias -g H='|head'
 alias -g T='|tail'
 alias -g G='|grep'
 alias -g GG='2>&1|grep'
-alias l='less'
+alias l='less -r'
 alias t='tail'
 alias h='head'
 
@@ -13,4 +13,7 @@ alias g1='gvim --servername g1 --remote-tab'
 alias g2='gvim --servername g2 --remote-tab'
 alias g3='gvim --servername g3 --remote-tab'
 
-alias sdru='tmux a'
+alias sdru='tmux a -d'
+alias dig='dig +nostats +noquestion +nocmd +nocomments'
+
+

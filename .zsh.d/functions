@@ -15,3 +15,13 @@ psg() { ps axu | (read line; echo $line; grep -i "$@"|grep -v "grep -i $@") }
 c.. () { [[ "$1" == "" ]] && return; orig=$(pwd); while true; do old=$(pwd); cd .. ; if [[ ! "$(pwd)" =~ "$1" ]]; then cd $orig; cd $old; return; fi; done }
 
 .g () { orig=$(pwd); while [[ $(pwd) != "/" ]]; do cd .. ; if [[ -d .git ]]; then return; fi; done; cd $orig }
+
+reset-paste () { printf "\e[?2004l" }
+
+sudo () {
+    if [[ "$#" == 0 || ( "$#" == 1 && "$1" == "-i" ) ]]; then
+        /usr/bin/sudo $SHELL
+    else
+        /usr/bin/sudo "$@"
+    fi
+}

@@ -15,5 +15,6 @@ alias g3='gvim --servername g3 --remote-tab'
 
 alias sdru='tmux a -d'
 alias dig='dig +nostats +noquestion +nocmd +nocomments'
-
-
+alias apl=ansible-playbook
+alias an=ansible
+alias tis='tig status'

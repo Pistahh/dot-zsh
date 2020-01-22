@@ -18,3 +18,7 @@ alias dig='dig +nostats +noquestion +nocmd +nocomments'
 alias apl=ansible-playbook
 alias an=ansible
 alias tis='tig status'
+alias gs='git status'
+alias gd='git diff'
+alias gl='git lg'
+

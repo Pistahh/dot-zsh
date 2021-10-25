@@ -25,3 +25,5 @@ sudo () {
         /usr/bin/sudo "$@"
     fi
 }
+
+sdru () { [[ -z $1 ]] && echo tmux a -d -t 0 || echo tmux a -d -t $1 }

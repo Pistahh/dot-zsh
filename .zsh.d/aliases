@@ -2,8 +2,11 @@ alias -g LL='|less'
 alias -g L='2>&1 | less'
 alias -g H='|head'
 alias -g T='|tail'
-alias -g G='|grep'
-alias -g GG='2>&1|grep'
+GREP=grep
+rg --version >/dev/null 2>&1 && GREP=rg
+alias -g G='|'$GREP
+alias -g GG='2>&1|'$GREP
+
 alias l='less -r'
 alias t='tail'
 alias h='head'
@@ -17,7 +20,12 @@ alias dig='dig +nostats +noquestion +nocmd +nocomments'
 alias apl=ansible-playbook
 alias an=ansible
 alias tis='tig status'
-alias gs='git status'
+alias gs='git status -uall --renames --short'
 alias gd='git diff'
 alias gl='git lg'
+alias gco='git checkout'
+alias gcanepf='git commit --amend --no-edit && git push --force'
 
+alias k=kubectl
+
+[[ -x /usr/bin/fdfind ]] && alias fd=/usr/bin/fdfind

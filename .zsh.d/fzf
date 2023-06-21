@@ -1,4 +1,4 @@
-[[ -f /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
-[[ -f /usr/share/fzf/shell/completion.zsh ]] && source /usr/share/fzf/shell/completion.zsh
-[[ -f /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
-[[ -f /usr/share/fzf/shell/key-bindings.zsh ]] && source /usr/share/fzf/shell/key-bindings.zsh
+for dir in /usr/share/fzf /usr/share/fzf/shell /usr/share/doc/fzf/examples; do
+    [[ -f $dir/completion.zsh ]] && source $dir/completion.zsh
+    [[ -f $dir/key-bindings.zsh ]] && source $dir/key-bindings.zsh
+done

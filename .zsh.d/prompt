@@ -29,7 +29,7 @@ precmd () {
 
     j=$(jobs|wc -l)
     if [ "$j" != "0" ]; then
-        PR_JOBS="J:$j"
+        PR_JOBS="${PRB_YELLOW} J:$j ${PR_RESET}"
     else
         PR_JOBS=""
     fi
@@ -41,13 +41,25 @@ precmd () {
         PR_GIT=""
     fi
 
+    if [[ -n "$AWS_OKTA_PROFILE" ]]; then
+        PR_AWS=" ${PR_YELLOW}A:$AWS_OKTA_PROFILE"
+    else
+        PR_AWS=""
+    fi
+
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        PR_VENV="${PRB_BLUE} V:${VIRTUAL_ENV##$HOME/} ${PR_RESET}"
+    else
+        PR_VENV=""
+    fi
+
     PS1="$PS1L1
 $PS1L2"
 
     echo -ne '%G'
 }
 
-    PS1L1='${PRB_BLUE} %n@%m $PRB_GREEN %D{%T} $PR_RESET$PR_SCREEN$PR_JOBS$PR_GIT${PR_RESET} %B%~$PR_RESET'
+    PS1L1='${PRB_BLUE} %n@%m $PRB_GREEN %D{%T} $PR_RESET$PR_VENV$PR_SCREEN$PR_JOBS$PR_GIT$PR_AWS${PR_RESET} %B%~$PR_RESET'
 
     PS1L2='\
 ${PRB_BLUE} %! \

@@ -1,30 +1,36 @@
-alias -g LL='|less'
-alias -g L='2>&1 | less'
+export PAGER=less
+bat --version > /dev/null 2>&1 && PAGER=bat
+alias -g LL='|'$PAGER
+alias -g L='2>&1 | '$PAGER
 alias -g H='|head'
 alias -g T='|tail'
+
 GREP=grep
 rg --version >/dev/null 2>&1 && GREP=rg
-alias -g G='|'$GREP
-alias -g GG='2>&1|'$GREP
+alias -g G='2>&1|'$GREP
+alias -g GG='|'$GREP
 
-alias l='less -r'
+alias l=$PAGER
 alias t='tail'
 alias h='head'
 
-alias vi=vim
-alias g1='gvim --servername g1 --remote-tab'
-alias g2='gvim --servername g2 --remote-tab'
-alias g3='gvim --servername g3 --remote-tab'
+vim --version >/dev/null 2>&1 && EDITOR=vim
+nvim --version >/dev/null 2>&1 && EDITOR=nvim
+
+alias vi=$EDITOR
 
 alias dig='dig +nostats +noquestion +nocmd +nocomments'
 alias apl=ansible-playbook
 alias an=ansible
 alias tis='tig status'
 alias gs='git status -uall --renames --short'
+alias gsu='git status -uno --renames --short'
 alias gd='git diff'
 alias gl='git lg'
 alias gco='git checkout'
-alias gcanepf='git commit --amend --no-edit && git push --force'
+alias gcane='git commit --amend --no-edit --date=now'
+alias gcanepf='git commit --amend --no-edit --date=now && git push --force'
+alias gaaap='git add -A && git commit --amend --no-edit --date=now && git push --force'
 
 alias k=kubectl
 

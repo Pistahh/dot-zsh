@@ -1,4 +1,0 @@
-_CARGO_ENV=~/.cargo/env
-
-[[ -f $_CARGO_ENV ]] && source $_CARGO_ENV
-
